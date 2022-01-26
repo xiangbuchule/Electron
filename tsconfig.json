@@ -1,0 +1,55 @@
+{
+    "compilerOptions": {
+        // 指定ECMAScript目标版本
+        "target": "ES6",
+        // 不编译解析js文件
+        "allowJs": false,
+        // 在监视模式下运行编译器。会监视输出文件，在它们改变时重新编译。
+        "watch": false,
+        // 忽略所有的声明文件（ *.d.ts）的类型检查。
+        "skipLibCheck": true,
+        // 忽略库的默认声明文件的类型检查。
+        "skipDefaultLibCheck": true,
+        // 指定编译后的目录，若使用webpack可不用，因为webpack会控制总输出
+        "outDir": "./release/electron",
+        // 启用所有严格类型检查选项。
+        "strict": true,
+        // 报告switch语句的fallthrough错误。（即，不允许switch的case语句贯穿）
+        "noFallthroughCasesInSwitch": true,
+        // 指定编译后模块为commonjs代码：
+        "module": "commonjs",
+        // 指定模块解析方式
+        "moduleResolution": "Node",
+        // es的import导入模块方式
+        "esModuleInterop": true,
+        // 强类型检查
+        "noImplicitAny": true,
+        // 模块解析的基本路径
+        "baseUrl": ".",
+        // 模块的路径
+        "paths": {
+            // 从以下路径去寻找模块。*表匹配所有文件
+            "*": ["node_modules/*"]
+        },
+        // 设置源码编码
+        "charset": "UTF-8",
+        // 打印编译后的文件名
+        "listEmittedFiles": false,
+        // 打印源文件名
+        "listFiles": false,
+        // 不生成输出文件
+        "noEmit": false,
+        // 报错时不生成编译后的文件
+        "noEmitOnError": true,
+        // 若有未使用的局部变量则抛错。
+        "noUnusedLocals": true,
+        // 编译时去掉所有源码注释
+        "removeComments": true,
+        // 生成相应的.map文件。
+        "sourceMap": true
+    },
+    // 包含的文件
+    "include": ["./app", "./@types"],
+    // 排除的文件
+    "exclude": ["./app/renderer/react", "extensions"]
+}

@@ -1,0 +1,51 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // 调试Electron主线程
+        {
+            // 调试名
+            "name": "Electron Main",
+            // 请求类型为启动，attach(附加)
+            "request": "launch",
+            // 调试开始前先执行任务
+            "preLaunchTask": "npm: react:start:electron",
+            /**
+             * 指定程序启动调试的目录 ,当vscode启动目录不是项目根目录
+             * 并且调试npm script时非常有用
+             */
+            "cwd": "${workspaceFolder}",
+            // 置运行时可执行文件路径
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron-forge",
+            // 传递给运行时可执行文件的参数
+            "runtimeArgs": [
+                // 开始运行electron
+                "start"
+            ],
+            // 添加额外的环境变量
+            "env": {},
+            // 指定调试入口文件地址
+            "program": "${workspaceFolder}/release/electron/main.js",
+            // 调试跳过的文件
+            "skipFiles": [
+                // 跳过node核心模块
+                "<node_internals>/**",
+                // 跳过node_modules
+                "${workspaceFolder}/**/node_modules/**"
+            ],
+            // 调试器类型
+            "type": "pwa-node",
+            /**
+             * 使用sourceMaps跟踪源代码
+             * 调试编译后的代码时使用
+             */
+            "sourceMaps": true,
+            // 当map文件不在js文件同目录时用于指定 sourceMaps的位置
+            // "outFiles": "${workspaceFolder}/release/electron",
+            // 自动重启调试
+            "restart": true
+        }
+    ]
+}

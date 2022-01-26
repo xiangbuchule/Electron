@@ -1,0 +1,100 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "2.0.0",
+    "tasks": [
+        // eslint检查任务
+        {
+            // 任务类型为npm任务
+            "type": "npm",
+            // 执行的npm脚本为eslint，即npm run eslint
+            "script": "eslint",
+            // 错误捕获设置
+            "problemMatcher": [],
+            // 终端配置
+            "presentation": {
+                // 控制是否显示“终端将被任务重用，按任意键关闭它”消息
+                "showReuseMessage": false
+            },
+            // 任务名
+            "label": "npm: eslint",
+            // 任务描述
+            "detail": "eslint ./app/main"
+        },
+        // 编译任务
+        {
+            // 任务类型为npm任务
+            "type": "npm",
+            // 执行的npm脚本为compile:development，即npm run compile:development
+            "script": "compile:development",
+            // 错误捕获设置
+            "problemMatcher": [],
+            // 终端配置
+            "presentation": {
+                // 控制是否显示“终端将被任务重用，按任意键关闭它”消息
+                "showReuseMessage": false
+            },
+            // 任务名
+            "label": "npm: compile:development",
+            // 任务描述
+            "detail": "cross-env compileMode=Development isRemoveDebugInfo=N npm run webpack:development",
+            // 依赖于eslint代码检查任务，eslint代码检查任务完成才启动该编译任务
+            "dependsOn": ["npm: eslint"]
+        },
+        // 启动react任务
+        {
+            // 任务类型为npm任务
+            "type": "npm",
+            // 执行的npm脚本为react-start，即npm run react-start
+            "script": "react:start:electron",
+            // 错误捕获设置
+            "problemMatcher": {
+                // 问题模式或者所提供或预定义问题模式的名称。如果已指定基准，则可以省略。
+                "pattern": {
+                    // 用于在输出中查找错误、警告或信息的正则表达式。
+                    "regexp": ""
+                },
+                // 用于跟踪在后台任务上激活的匹配程序的开始和结束的模式
+                "background": {
+                    // 该人物开始就运行
+                    "activeOnStart": true,
+                    // 匹配到Compiled successfully!表示这个后台任务开始了
+                    "beginsPattern": "Compiled successfully!|Compiled with warnings\\.|Failed to compile\\.",
+                    // 表示这个后台任务结束了，通知后续任务运行，或者launch.json运行
+                    "endsPattern": "Compiled successfully!|Compiled with warnings\\.|Failed to compile\\."
+                }
+            },
+            // 终端配置
+            "presentation": {
+                // 控制执行的命令是否在终端中回显
+                "echo": true,
+                // 控制是否将集成终端面板置于前面
+                "reveal": "always",
+                // 控制终端是否获取输入焦点
+                "focus": false,
+                /**
+                 * 控制终端实例是否在任务运行之间共享，可能的值为：
+                 * shared - 终端是共享的，其他任务运行的输出被添加到同一个终端。
+                 * dedicated- 终端专用于特定任务。如果再次执行该任务，则重新使用终端。
+                 * 但是，不同任务的输出呈现在不同的终端中。
+                 * new - 该任务的每次执行都使用新的干净终端。
+                 */
+                // 每次任务运行时新建终端
+                "panel": "shared",
+                // 控制是否显示“终端将被任务重用，按任意键关闭它”消息
+                "showReuseMessage": false,
+                // 控制在运行此任务之前是否清除终端
+                "clear": false
+            },
+            // 后台运行
+            "isBackground": true,
+            // 任务名
+            "label": "npm: react:start:electron",
+            // 任务描述
+            "detail": "cd ./app/renderer/react && npm run start:electron",
+            // 依赖于编译任务，编译任务完成才启动react
+            "dependsOn": ["npm: compile:development"]
+        }
+    ]
+}

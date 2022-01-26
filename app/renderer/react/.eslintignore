@@ -1,0 +1,10 @@
+# ESLint 忽略检查的文件夹
+node_modules
+static
+scripts
+config
+
+# ESLint 忽略检查的文件
+*.config.js
+*.plugins.js
+.eslintrc.js
